@@ -51,7 +51,7 @@ jobs:
         [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
         
     - name: Build x64
-      run: msbuild $env:Solution_Path /p:Platform=x64 /p:AppxBundlePlatforms="x64" /p:AppxPackageDir=C:\Package\x64 /p:PackageCertificateKeyFile=GoodPass_TemporaryKey.pfx /p:PackageCertificatePassword="${{ secrets.PFX_PW }}" /restore
+      run: msbuild GoodPass /p:Platform=x64 /p:AppxBundlePlatforms="x64" /p:AppxPackageDir=C:\Package\x64 /p:PackageCertificateKeyFile=GoodPass_TemporaryKey.pfx /p:PackageCertificatePassword="${{ secrets.PFX_PW }}" /restore
       env:
           BuildMode: SideloadOnly
           Configuration: Release
