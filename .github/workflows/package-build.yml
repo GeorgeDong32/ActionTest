@@ -50,17 +50,11 @@ jobs:
         $certificatePath = "GitHubActionsWorkflow.pfx"
         [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
         
-#     # Install certificate
-#     - name: Install pfx to store
-#       run: 
-#         $pfxpath = 'GoodPass_TemporaryKey.pfx'
-#         Add-Type -AssemblyName System.Security
-#         $cert = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2
-#         $cert.Import($pfxpath, ${{ secrets.PFX_PW }}, [System.Security.Cryptography.X509Certificates.X509KeyStorageFlags]"PersistKeySet")
-#         $store = new-object system.security.cryptography.X509Certificates.X509Store -argumentlist "MY", CurrentUser
-#         $store.Open([System.Security.Cryptography.X509Certificates.OpenFlags]"ReadWrite")
-#         $store.Add($cert)
-#         $store.Close()
+    - name: Build x64
+      run: msbuild $env:Solution_Path /p:Platform=x64 /p:AppxBundlePlatforms="x64" /p:AppxPackageDir=C:\Package\x64 /p:PackageCertificateKeyFile=GoodPass_TemporaryKey.pfx /p:PackageCertificatePassword="${{ secrets.PFX_PW }}" /restore
+      env:
+          BuildMode: SideloadOnly
+          Configuration: Release
 
     # Create the app package by building and packaging the project
     - name: Create the app package
