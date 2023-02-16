@@ -22,6 +22,7 @@
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x64</AppxBundlePlatforms>
+    <PackageCertificateKeyFile>GoodPass_TemporaryKey.pfx</PackageCertificateKeyFile>
     <PackageCertificateThumbprint>97944DEAC266FA3323658ABA56E71561DF956D06</PackageCertificateThumbprint>
   </PropertyGroup>
   <ItemGroup>
